@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardFormatComponent } from '../card-format/card-format.component';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-card-list',
@@ -9,25 +12,36 @@ import { CardFormatComponent } from '../card-format/card-format.component';
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.css'],
 })
-export class CardListComponent {
-  cards = [
-    {
-      backgroundImage: '../assets/images/card-bg.png',
-      cardImage: '../assets/images/placeholder.jpg',
-      name: 'John Doe',
-      beltRank: 'Black Belt',
-      achievement: 'Regional Champion 2024',
-      clubName: 'Victory Judo Club',
-    },
-    {
-      backgroundImage: '../assets/images/card-bg.png',
-      cardImage: '../assets/images/placeholder.jpg',
-      name: 'Jane Smith',
-      beltRank: 'Brown Belt',
-      achievement: 'State Finalist 2024',
-      clubName: 'Elite Martial Arts',
-    },
-  ];
+export class CardListComponent implements OnInit {
+  cards: any[] = [];
+  errorMessage: string = '';
+
+  constructor(private http: HttpClient) {}
+
+  async ngOnInit() {
+    try {
+      const userId = await this.getUserId(); // Fetch authenticated user ID
+      this.cards = await this.getUserCards(userId);
+    } catch (error: any) {
+      this.errorMessage = error.message || 'Failed to load cards.';
+      console.error('Error fetching cards:', error);
+    }
+  }
+
+  async getUserId(): Promise<string> {
+    const response: any = await lastValueFrom(
+      this.http.get(`${environment.apiUrl}/auth/verify`, { withCredentials: true })
+    );
+    return response.userId;
+  }
+
+  async getUserCards(userId: string): Promise<any[]> {
+    const response: any = await lastValueFrom(
+      this.http.get(`${environment.apiUrl}/cards/${userId}`, { withCredentials: true })
+    );
+    return response;
+  }
+
 
   cart: any[] = []; // Stores the cards added to the cart
   showModal: boolean = false; // Tracks if the modal is open
@@ -55,10 +69,5 @@ export class CardListComponent {
   cancelDelete() {
     this.showModal = false; // Close the modal without deleting
     this.cardToDeleteIndex = null;
-  }
-
-  ngOnInit() {
-    // Here you can fetch the user's cards from a backend service
-    // For now, we're using a static example
   }
 }
