@@ -1,0 +1,13 @@
+<div class="card" [style.backgroundImage]="'url(' + backgroundImage + ')'">
+    <div class="card-image">
+      <img [src]="cardImage || 'assets/images/placeholder.png'" alt="Card Image" />
+    </div>
+    <div class="card-details">
+      <h4 class="season">{{ season }}</h4>
+      <h2 class="name">{{ name }}</h2>
+      <h3 class="belt-rank">{{ beltRank }}</h3>
+      <p class="achievement">{{ achievement }}</p>
+      <p class="club-name">{{ clubName }}</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,29 @@
+<div class="card-list">
+    <div class="card-wrapper" *ngFor="let card of cards; let i = index">
+      <app-card-format
+        [backgroundImage]="card.backgroundImage"
+        [cardImage]="card.cardImage"
+        [name]="card.name"
+        [beltRank]="card.beltRank"
+        [achievement]="card.achievement"
+        [clubName]="card.clubName"
+      ></app-card-format>
+      <div class="card-actions">
+        <button (click)="addToCart(card)">Add to Cart</button>
+        <button (click)="confirmDelete(i)">Delete</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal -->
+  <div class="modal" *ngIf="showModal">
+    <div class="modal-content">
+      <h3>Confirm Delete</h3>
+      <p>Are you sure you want to delete this card?</p>
+      <div class="modal-actions">
+        <button (click)="deleteCard()">Yes, Delete</button>
+        <button (click)="cancelDelete()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
