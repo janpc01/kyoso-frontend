@@ -1,0 +1,25 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    margin: 0 10px;
+    color: #333;
+  }
+  
+  .navbar button {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .navbar button:hover {
+    text-decoration: underline;
+  }
+  
