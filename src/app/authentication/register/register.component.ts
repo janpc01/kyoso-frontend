@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,14 +15,29 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
+  errorMessage = '';
 
-  onSubmit() {
+  constructor(private authService: AuthService, private router: Router) {}
+  
+  async onSubmit() {
     if (this.password !== this.confirmPassword) {
-      console.error('Passwords do not match');
+      this.errorMessage = 'Passwords do not match';
       return;
     }
 
-    console.log('Register submitted:', { email: this.email, password: this.password });
-    // TODO: Send registration data to server
+    try {
+      // Register the user
+      await this.authService.register({ email: this.email, password: this.password });
+      console.log('User registered successfully');
+
+      // Log the user in immediately
+      await this.authService.login(this.email, this.password);
+      console.log('User logged in successfully');
+
+      // Redirect to home page
+      this.router.navigate(['/']);
+    } catch (error: any) {
+      this.errorMessage = error?.error?.message || 'An error occurred. Please try again.';
+    }
   }
 }

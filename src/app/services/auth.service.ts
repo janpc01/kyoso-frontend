@@ -48,6 +48,19 @@ export class AuthService {
     }
   }
 
+  // Register by calling the backend /api/auth/signup
+  async register(userData: { email: string; password: string }): Promise<void> {
+    try {
+      await lastValueFrom(
+        this.http.post(`${environment.apiUrl}/auth/signup`, userData)
+      );
+      console.log('Registration successful');
+    } catch (error) {
+      console.error('Registration failed:', error);
+      throw error;
+    }
+  }
+
   // Getter to retrieve current authentication status
   getAuthStatus(): boolean {
     return this.isAuthenticatedSubject.value;
