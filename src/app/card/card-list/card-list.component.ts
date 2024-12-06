@@ -45,10 +45,17 @@ export class CardListComponent implements OnInit {
     this.showModal = true;
   }
 
-  deleteCard() {
+  async removeCard() {
     if (this.cardToDeleteIndex !== null) {
-      this.cards.splice(this.cardToDeleteIndex, 1);
-      console.log('Card deleted at index:', this.cardToDeleteIndex);
+      try {
+        const cardId = this.cards[this.cardToDeleteIndex]._id;
+        await this.cardService.deleteCard(cardId);
+        this.cards.splice(this.cardToDeleteIndex, 1);
+        console.log('Card deleted successfully');
+      } catch (error) {
+        console.error('Error deleting card:', error);
+        this.errorMessage = 'Failed to delete card. Please try again.';
+      }
       this.cardToDeleteIndex = null;
     }
     this.showModal = false;

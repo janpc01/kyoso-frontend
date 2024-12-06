@@ -43,4 +43,10 @@ export class CardService {
     const response = await lastValueFrom(this.http.post(`${environment.apiUrl}/cards`, cardData, { withCredentials: true }));
     return response;
   }
+
+  // Delete a card
+  async deleteCard(cardId: string): Promise<any> {
+    const response = await lastValueFrom(this.http.delete(`${environment.apiUrl}/cards/${cardId}`, { withCredentials: true }));
+    return response;
+  }
 }

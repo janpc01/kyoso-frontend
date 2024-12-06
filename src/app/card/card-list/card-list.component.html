@@ -21,9 +21,11 @@
       <h3>Confirm Delete</h3>
       <p>Are you sure you want to delete this card?</p>
       <div class="modal-actions">
-        <button (click)="deleteCard()">Yes, Delete</button>
+        <button (click)="removeCard()">Yes, Delete</button>
         <button (click)="cancelDelete()">Cancel</button>
       </div>
     </div>
   </div>
+  
+  <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
   
