@@ -18,8 +18,8 @@ export class ProfileComponent implements OnInit {
   async ngOnInit() {
     this.isAuthenticated = await this.authService.checkAuthentication();
     if (!this.isAuthenticated) {
-      // Redirect to login page if not authenticated
-      this.router.navigate(['/login']);
+      // Redirect to home page if not authenticated
+      this.router.navigate(['/']);
     }
   }
 }

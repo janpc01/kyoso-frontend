@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
 
@@ -15,32 +15,33 @@ export class NavigationComponent implements OnInit, OnDestroy {
   isAuthenticated: boolean = false;
   private authSubscription?: Subscription;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    // Subscribe to authentication state changes
     this.authSubscription = this.authService.isAuthenticated$.subscribe(
       (isAuthenticated) => {
         this.isAuthenticated = isAuthenticated;
       }
     );
 
-    // Initial check
     this.authService.checkAuthentication();
   }
 
-  ngOnDestroy() {
-    // Clean up subscription when component is destroyed
-    if (this.authSubscription) {
-      this.authSubscription.unsubscribe();
+  async logout() {
+    try {
+      await this.authService.logout();
+      this.router.navigate(['/']); // Redirect to home page after logout
+    } catch (error) {
+      console.error('Logout failed:', error);
     }
   }
 
-  logout() {
-    this.authService.logout().then(() => {
-      console.log('User logged out successfully');
-    }).catch((error) => {
-      console.error('Logout failed:', error);
-    });
+  ngOnDestroy() {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
   }
 }
