@@ -12,30 +12,35 @@ import { Subscription } from 'rxjs';
   styleUrl: './navigation.component.css'
 })
 export class NavigationComponent implements OnInit, OnDestroy {
-  isAuthenticated = false;
-  private authSubscription!: Subscription;
+  isAuthenticated: boolean = false;
+  private authSubscription?: Subscription;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
+    // Subscribe to authentication state changes
     this.authSubscription = this.authService.isAuthenticated$.subscribe(
-      (authStatus) => {
-        this.isAuthenticated = authStatus; // Update when the auth status changes
+      (isAuthenticated) => {
+        this.isAuthenticated = isAuthenticated;
       }
     );
+
+    // Initial check
+    this.authService.checkAuthentication();
   }
 
   ngOnDestroy() {
-    this.authSubscription.unsubscribe(); // Avoid memory leaks
+    // Clean up subscription when component is destroyed
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
   }
 
   logout() {
     this.authService.logout().then(() => {
-      this.isAuthenticated = false;
       console.log('User logged out successfully');
     }).catch((error) => {
       console.error('Logout failed:', error);
     });
   }
-
 }

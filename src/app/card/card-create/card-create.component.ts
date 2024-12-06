@@ -4,12 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 import { CardService } from '../../services/card.service';
+import { CardFormatComponent } from '../card-format/card-format.component';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-create',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, CardFormatComponent],
   templateUrl: './card-create.component.html',
   styleUrls: ['./card-create.component.css'],
 })
@@ -25,11 +26,22 @@ export class CardCreateComponent {
   selectedImage: File | null = null;
   errorMessage: string = '';
   successMessage: string = '';
+  previewImage: string = '../assets/images/placeholder.jpg';
 
   constructor(private http: HttpClient, private authService: AuthService, private cardService: CardService, private router: Router) {}
 
   onImageSelected(event: any) {
-    this.card.image = event.target.files[0];
+    const file = event.target.files[0];
+    this.card.image = file;
+    
+    // Create preview URL
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.previewImage = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   async composeCard(): Promise<void> {

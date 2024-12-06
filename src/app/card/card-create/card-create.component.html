@@ -1,55 +1,69 @@
 <div class="card-create">
     <h2>Create a New Card</h2>
-    <form>
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input
-          id="name"
-          type="text"
-          [(ngModel)]="card.name"
-          name="name"
-          required
-        />
+    <div class="create-container">
+      <form class="form-section">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            id="name"
+            type="text"
+            [(ngModel)]="card.name"
+            name="name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="beltRank">Belt Rank</label>
+          <input
+            id="beltRank"
+            type="text"
+            [(ngModel)]="card.beltRank"
+            name="beltRank"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="achievement">Achievement</label>
+          <input
+            id="achievement"
+            type="text"
+            [(ngModel)]="card.achievement"
+            name="achievement"
+          />
+        </div>
+        <div class="form-group">
+          <label for="clubName">Club Name</label>
+          <input
+            id="clubName"
+            type="text"
+            [(ngModel)]="card.clubName"
+            name="clubName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="cardImage">Card Image</label>
+          <input
+            id="cardImage"
+            type="file"
+            (change)="onImageSelected($event)"
+            required
+          />
+        </div>
+        <button type="submit" (click)="composeCard(); $event.preventDefault()">Create Card</button>
+      </form>
+      
+      <div class="preview-section">
+        <h3>Card Preview</h3>
+        <app-card-format
+          [backgroundImage]="'../assets/images/card-bg.png'"
+          [cardImage]="previewImage"
+          [name]="card.name || 'Name'"
+          [beltRank]="card.beltRank || 'Belt Rank'"
+          [achievement]="card.achievement || 'Achievement'"
+          [clubName]="card.clubName || 'Club Name'"
+        ></app-card-format>
       </div>
-      <div class="form-group">
-        <label for="beltRank">Belt Rank</label>
-        <input
-          id="beltRank"
-          type="text"
-          [(ngModel)]="card.beltRank"
-          name="beltRank"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label for="achievement">Achievement</label>
-        <input
-          id="achievement"
-          type="text"
-          [(ngModel)]="card.achievement"
-          name="achievement"
-        />
-      </div>
-      <div class="form-group">
-        <label for="clubName">Club Name</label>
-        <input
-          id="clubName"
-          type="text"
-          [(ngModel)]="card.clubName"
-          name="clubName"
-        />
-      </div>
-      <div class="form-group">
-        <label for="cardImage">Card Image</label>
-        <input
-          id="cardImage"
-          type="file"
-          (change)="onImageSelected($event)"
-          required
-        />
-      </div>
-      <button type="submit" (click)="composeCard(); $event.preventDefault()">Create Card</button>
-    </form>
+    </div>
   
     <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
     <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
