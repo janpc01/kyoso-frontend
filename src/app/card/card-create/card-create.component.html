@@ -1,0 +1,57 @@
+<div class="card-create">
+    <h2>Create a New Card</h2>
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          id="name"
+          type="text"
+          [(ngModel)]="card.name"
+          name="name"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="beltRank">Belt Rank</label>
+        <input
+          id="beltRank"
+          type="text"
+          [(ngModel)]="card.beltRank"
+          name="beltRank"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="achievement">Achievement</label>
+        <input
+          id="achievement"
+          type="text"
+          [(ngModel)]="card.achievement"
+          name="achievement"
+        />
+      </div>
+      <div class="form-group">
+        <label for="clubName">Club Name</label>
+        <input
+          id="clubName"
+          type="text"
+          [(ngModel)]="card.clubName"
+          name="clubName"
+        />
+      </div>
+      <div class="form-group">
+        <label for="cardImage">Card Image</label>
+        <input
+          id="cardImage"
+          type="file"
+          (change)="onImageSelected($event)"
+          required
+        />
+      </div>
+      <button type="submit" (click)="createCard(); $event.preventDefault()">Create Card</button>
+    </form>
+  
+    <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </div>
+  

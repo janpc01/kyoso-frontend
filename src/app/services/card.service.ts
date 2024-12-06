@@ -37,4 +37,10 @@ export class CardService {
     const decodedString = `data:image/png;base64,${base64String}`;
     return decodedString;
   }
+
+  // Create a new card
+  async createCard(cardData: any): Promise<any> {
+    const response = await lastValueFrom(this.http.post(`${environment.apiUrl}/cards`, cardData, { withCredentials: true }));
+    return response;
+  }
 }
