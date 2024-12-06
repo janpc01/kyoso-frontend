@@ -2,7 +2,7 @@
     <div class="card-wrapper" *ngFor="let card of cards; let i = index">
       <app-card-format
         [backgroundImage]="card.backgroundImage"
-        [cardImage]="card.cardImage"
+        [cardImage]=card.image
         [name]="card.name"
         [beltRank]="card.beltRank"
         [achievement]="card.achievement"

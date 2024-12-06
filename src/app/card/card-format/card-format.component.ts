@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 })
 export class CardFormatComponent {
   @Input() backgroundImage: string = '../assets/images/card-bg.png'; // URL for the card background
-  @Input() cardImage: string = '../assets/images/placeholder.png'; // User-uploaded image or placeholder
+  @Input() cardImage: string = '../assets/images/placeholder.jpg'; // User-uploaded image or placeholder
   @Input() season: string = '2024/25'; // Hardcoded season
   @Input() name: string = 'Name'; // Placeholder or user-input name
   @Input() beltRank: string = 'Belt Rank'; // Placeholder or user-input belt rank
