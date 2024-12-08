@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardFormatComponent } from '../card-format/card-format.component';
 import { CardService } from '../../services/card.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-card-list',
@@ -13,12 +14,10 @@ import { CardService } from '../../services/card.service';
 export class CardListComponent implements OnInit {
   cards: any[] = [];
   errorMessage: string = '';
-
-  cart: any[] = [];
   showModal: boolean = false;
   cardToDeleteIndex: number | null = null;
 
-  constructor(private cardService: CardService) {}
+  constructor(private cardService: CardService, private cartService: CartService) {}
 
   async ngOnInit() {
     try {
@@ -35,8 +34,15 @@ export class CardListComponent implements OnInit {
     }
   }
 
+  // Use CartService to add the card to the cart
   addToCart(card: any) {
-    this.cart.push(card);
+    this.cartService.addToCart({
+      cardId: card._id,
+      name: card.name,
+      image: card.image,
+      price: card.price,
+      quantity: 1, // Default to 1 when adding a new item
+    });
     console.log('Added to cart:', card);
   }
 

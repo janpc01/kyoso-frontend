@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
-
+import { CartService } from './cart.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +10,7 @@ export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable(); // Observable for components to subscribe to
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cartService: CartService) { }
 
   // Verify authentication by calling the backend /api/auth/verify
   async checkAuthentication(): Promise<boolean> {
@@ -42,6 +42,8 @@ export class AuthService {
     try {
       await lastValueFrom(this.http.post(`${environment.apiUrl}/auth/signout`, {}, { withCredentials: true }));
       this.isAuthenticatedSubject.next(false); // Notify all subscribers after logout
+      localStorage.removeItem('shopping_cart'); // Clear cart on logout
+      this.cartService.clearCart(); // Notify components
     } catch (error) {
       console.error('Logout failed:', error);
       throw error;

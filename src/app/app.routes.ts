@@ -6,10 +6,14 @@ import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { ProfileComponent } from './authentication/profile/profile.component';
 
+// Shopping
+import { CartComponent } from './shopping/cart/cart.component';
+
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'cart', component: CartComponent },
   { path: '**', redirectTo: '' }, // Redirect unknown routes to home
 ];
