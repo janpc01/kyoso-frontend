@@ -33,6 +33,10 @@ export class CartComponent implements OnInit {
   }
 
   proceedToCheckout(): void {
+    if (this.cartItems.length === 0) {
+      alert('Your cart is empty.');
+      return;
+    }
     this.router.navigate(['/checkout']);
   }
 }
