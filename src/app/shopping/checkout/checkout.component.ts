@@ -5,7 +5,7 @@ import { PaymentService } from '../../services/payment.service';
 import { OrderService } from '../../services/order.service';
 import { Router } from '@angular/router';
 import { Stripe, StripeElements } from '@stripe/stripe-js';
-import { async, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -35,7 +35,7 @@ export class CheckoutComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Initialize form
+    // Initialize the form with validators
     this.checkoutForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -65,7 +65,7 @@ export class CheckoutComponent implements OnInit {
         return;
       }
 
-      // Generate payment intent
+      // Generate a payment intent
       const response = await firstValueFrom(
         this.paymentService.createPaymentIntent(
           this.total,
@@ -73,10 +73,9 @@ export class CheckoutComponent implements OnInit {
         )
       );
 
-      // Set showPaymentElement to true to render the DOM element
+      // Render Stripe payment element
       this.showPaymentElement = true;
 
-      // Ensure the DOM is updated before calling mount()
       setTimeout(() => {
         this.elements = this.stripe!.elements({ clientSecret: response.clientSecret });
         const paymentElement = this.elements.create('payment');
@@ -88,42 +87,57 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-
   async submitPayment(event: Event) {
     event.preventDefault();
     if (!this.stripe || !this.elements) return;
 
     this.isProcessing = true;
 
-    const { error } = await this.stripe.confirmPayment({
-      elements: this.elements,
-      confirmParams: {
-        return_url: window.location.origin + '/checkout',
-        receipt_email: this.checkoutForm.get('email')?.value,
-      },
-    });
+    try {
+      const { error, paymentIntent } = await this.stripe.confirmPayment({
+        elements: this.elements,
+        confirmParams: {
+          return_url: window.location.origin + '/checkout',
+          receipt_email: this.checkoutForm.get('email')?.value,
+        },
+        redirect: "if_required", // Prevents automatic redirection
+      });
 
-    if (error) {
-      alert(error.message);
+      if (error) {
+        alert(error.message);
+        console.error('Payment error:', error);
+      } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+        await this.completeOrder(paymentIntent.id);
+      }
+    } catch (err) {
+      console.error('Error during payment:', err);
+      alert('Payment failed. Please try again.');
+    } finally {
       this.isProcessing = false;
-    } else {
-      this.completeOrder();
     }
   }
 
-  private completeOrder() {
-    const orderData = {
-      items: this.cartItems,
-      shipping: this.checkoutForm.value,
-      totalAmount: this.total,
-    };
-
-    this.orderService.createOrder(orderData).subscribe({
-      next: () => {
-        this.cartService.clearCart();
-        this.router.navigate(['/order-confirmation']);
-      },
-      error: () => alert('Error processing order. Please try again.'),
-    });
+  private async completeOrder(paymentIntentId: string) {
+    try {
+      const orderData = {
+        items: this.cartItems.map(item => ({
+          cardId: item.cardId,
+          quantity: item.quantity
+        })),
+        shippingAddress: this.checkoutForm.value, // Matches backend's `shippingAddress` key
+        totalAmount: this.total,
+        paymentDetails: { paymentIntentId }, // Matches backend's `paymentDetails` key
+      };
+  
+      // Send order data to backend and retrieve the orderId
+      const order = await firstValueFrom(this.orderService.createOrder(orderData));
+  
+      // Clear the cart and navigate to order confirmation
+      this.cartService.clearCart();
+      this.router.navigate(['/order-confirmation'], { queryParams: { orderId: order._id } });
+    } catch (error) {
+      console.error('Error completing order:', error);
+      alert('There was an issue processing your order. Please try again.');
+    }
   }
 }

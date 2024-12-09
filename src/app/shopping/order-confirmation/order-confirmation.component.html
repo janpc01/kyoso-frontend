@@ -1,0 +1,37 @@
+<div class="order-confirmation-container">
+    <h2>Order Confirmation</h2>
+  
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading">
+      Loading your order details...
+    </div>
+  
+    <!-- Error State -->
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+  
+    <!-- Success State -->
+    <div *ngIf="!isLoading && order">
+      <p>Thank you for your order, <strong>{{ order.shippingAddress.fullName }}</strong>!</p>
+      <p>Your order ID is: <strong>{{ order._id }}</strong></p>
+  
+      <h3>Order Summary</h3>
+      <div class="order-items">
+        <div *ngFor="let item of order.items" class="order-item">
+          <img [src]="item.card.image" [alt]="item.card.name" />
+          <div class="item-details">
+            <p><strong>{{ item.card.name }}</strong></p>
+            <p>Quantity: {{ item.quantity }}</p>
+            <p>Price: ${{ item.card.price.toFixed(2) }}</p>
+          </div>
+        </div>
+      </div>
+  
+      <h3>Total: ${{ order.totalAmount.toFixed(2) }}</h3>
+  
+      <!-- Return to Home -->
+      <button (click)="goToHome()">Return to Home</button>
+    </div>
+  </div>
+  

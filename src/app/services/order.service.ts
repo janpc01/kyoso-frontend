@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 export interface ShippingAddress {
@@ -45,21 +46,49 @@ export interface Order {
 export class OrderService {
   private baseUrl = `${environment.apiUrl}/orders`;
 
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    withCredentials: true, // Ensures cookies are sent with cross-site requests
+  };
+
   constructor(private http: HttpClient) {}
 
-  createOrder(orderData: any): Observable<Order> {
-    return this.http.post<Order>(`${this.baseUrl}`, orderData);
+  // Create a new order
+  createOrder(orderData: {
+    items: { cardId: string; quantity: number }[],
+    shippingAddress: any,
+    totalAmount: number,
+    paymentDetails: { paymentIntentId: string }
+  }): Observable<Order> {
+    return this.http
+      .post<Order>(`${this.baseUrl}`, orderData, this.httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
+  // Fetch an order by ID
   getOrderById(orderId: string): Observable<Order> {
-    return this.http.get<Order>(`${this.baseUrl}/${orderId}`);
+    return this.http
+      .get<Order>(`${this.baseUrl}/${orderId}`, this.httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
-  updateOrder(orderId: string, updateData: any): Observable<Order> {
-    return this.http.patch<Order>(`${this.baseUrl}/${orderId}`, updateData);
+  // Update an order (e.g., status updates)
+  updateOrder(orderId: string, updateData: Partial<Order>): Observable<Order> {
+    return this.http
+      .patch<Order>(`${this.baseUrl}/${orderId}`, updateData, this.httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
+  // Delete an order
   deleteOrder(orderId: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${orderId}`);
+    return this.http
+      .delete<void>(`${this.baseUrl}/${orderId}`, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  // Generic error handler for HTTP calls
+  private handleError(error: any) {
+    console.error('Error in OrderService:', error);
+    return throwError(() => new Error(error?.error?.message || 'Something went wrong'));
   }
 }
