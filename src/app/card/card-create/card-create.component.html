@@ -1,71 +1,61 @@
 <div class="card-create">
-    <h2>Create a New Card</h2>
-    <div class="create-container">
-      <form class="form-section">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input
-            id="name"
-            type="text"
-            [(ngModel)]="card.name"
-            name="name"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="beltRank">Belt Rank</label>
-          <input
-            id="beltRank"
-            type="text"
-            [(ngModel)]="card.beltRank"
-            name="beltRank"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="achievement">Achievement</label>
-          <input
-            id="achievement"
-            type="text"
-            [(ngModel)]="card.achievement"
-            name="achievement"
-          />
-        </div>
-        <div class="form-group">
-          <label for="clubName">Club Name</label>
-          <input
-            id="clubName"
-            type="text"
-            [(ngModel)]="card.clubName"
-            name="clubName"
-          />
-        </div>
-        <div class="form-group">
-          <label for="cardImage">Card Image</label>
-          <input
-            id="cardImage"
-            type="file"
-            (change)="onImageSelected($event)"
-            required
-          />
-        </div>
-        <button type="submit" (click)="composeCard(); $event.preventDefault()">Create Card</button>
-      </form>
-      
-      <div class="preview-section">
-        <h3>Card Preview</h3>
-        <app-card-format
-          [backgroundImage]="'../assets/images/card-bg.png'"
-          [cardImage]="previewImage"
-          [name]="card.name || 'Name'"
-          [beltRank]="card.beltRank || 'Belt Rank'"
-          [achievement]="card.achievement || 'Achievement'"
-          [clubName]="card.clubName || 'Club Name'"
-        ></app-card-format>
+  <div class="card-container">
+    <div class="season-text">Season 1</div>
+    
+    <div class="image-area">
+      <button class="upload-button" (click)="fileInput.click()">
+        <img [src]="previewImage" *ngIf="previewImage" alt="Preview" style="width: 100%; height: 100%; object-fit: cover;">
+      </button>
+      <input
+        #fileInput
+        type="file"
+        (change)="onImageSelected($event)"
+        style="display: none;"
+        accept="image/*"
+      />
+    </div>
+
+    <div class="info-area">
+      <div class="info-field">
+        <input
+          type="text"
+          [(ngModel)]="card.name"
+          placeholder="Name"
+          name="name"
+          required
+        />
+      </div>
+      <div class="info-field">
+        <input
+          type="text"
+          [(ngModel)]="card.beltRank"
+          placeholder="Belt Rank"
+          name="beltRank"
+          required
+        />
+      </div>
+      <div class="info-field">
+        <input
+          type="text"
+          [(ngModel)]="card.achievement"
+          placeholder="Achievement"
+          name="achievement"
+        />
+      </div>
+      <div class="info-field">
+        <input
+          type="text"
+          [(ngModel)]="card.clubName"
+          placeholder="Club Name"
+          name="clubName"
+        />
       </div>
     </div>
-  
-    <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
-    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
   </div>
+  
+  <button class="create-button" (click)="composeCard()">Create Card</button>
+  
+  <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
+  <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
   

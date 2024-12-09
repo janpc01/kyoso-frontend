@@ -1,14 +1,21 @@
 <nav class="navbar">
-    <!-- Always visible -->
-    <a routerLink="/">Home</a>
-    <a routerLink="/cart">Cart</a>
-    
+  <div class="navbar-nav">
+    <a class="nav-link" routerLink="/">Home</a>
+    <a class="nav-link" routerLink="/cart">Cart</a>
+  </div>
+
+  <a class="navbar-brand" routerLink="/">
+    <img src="assets/images/logo.png" alt="Logo" class="navbar-logo">
+  </a>
+
+  <div class="navbar-nav ml-auto">
     <!-- Unauthenticated links -->
-    <a routerLink="/login" *ngIf="!isAuthenticated">Login</a>
-    <a routerLink="/register" *ngIf="!isAuthenticated">Register</a>
+    <a class="nav-link" routerLink="/login" *ngIf="!isAuthenticated">Login</a>
+    <a class="nav-link" routerLink="/register" *ngIf="!isAuthenticated">Register</a>
   
     <!-- Authenticated links -->
-    <a routerLink="/profile" *ngIf="isAuthenticated">Profile</a>
-    <button (click)="logout()" *ngIf="isAuthenticated">Logout</button>
-  </nav>
+    <a class="nav-link" routerLink="/profile" *ngIf="isAuthenticated">Profile</a>
+    <button class="nav-link" (click)="logout()" *ngIf="isAuthenticated">Logout</button>
+  </div>
+</nav>
   

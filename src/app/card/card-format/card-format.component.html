@@ -1,13 +1,15 @@
-<div class="card" [style.backgroundImage]="'url(' + backgroundImage + ')'">
-    <div class="card-image">
-      <img [src]="cardImage || 'assets/images/placeholder.jpg'" alt="Card Image" />
-    </div>
-    <div class="card-details">
-      <h4 class="season">{{ season }}</h4>
-      <h2 class="name">{{ name }}</h2>
-      <h3 class="belt-rank">{{ beltRank }}</h3>
-      <p class="achievement">{{ achievement }}</p>
-      <p class="club-name">{{ clubName }}</p>
-    </div>
+<div class="card">
+  <div class="season-text">Season 1</div>
+  
+  <div class="image-area">
+    <img [src]="cardImage || 'assets/images/placeholder.jpg'" alt="Card Image" />
   </div>
+
+  <div class="info-area">
+    <div class="info-field">{{ name }}</div>
+    <div class="info-field">{{ beltRank }}</div>
+    <div class="info-field">{{ achievement }}</div>
+    <div class="info-field">{{ clubName }}</div>
+  </div>
+</div>
   
