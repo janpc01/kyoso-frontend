@@ -1,6 +1,18 @@
-<div class="home">
-    <h1>Welcome to Kyoso</h1>
-    <p>Your gateway to amazing cards and experiences.</p>
+<div class="home-container">
+  <!-- Left side - Create Card Form -->
+  <div class="left-panel">
+    <h2>Create Your Card!</h2>
+    <div *ngIf="!isLoggedIn" class="register-prompt">
+      <a routerLink="/register" class="register-link">Click to Register and Create a Card!</a>
+    </div>
     <app-card-create></app-card-create>
   </div>
-  
+
+  <!-- Right side - Search Component -->
+  <div class="right-panel">
+    <app-search></app-search>
+  </div>
+</div>
+
+<!-- FAQ Section -->
+<app-faq></app-faq>

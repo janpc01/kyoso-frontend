@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
-
+import { catchError, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -48,5 +48,11 @@ export class CardService {
   async deleteCard(cardId: string): Promise<any> {
     const response = await lastValueFrom(this.http.delete(`${environment.apiUrl}/cards/${cardId}`, { withCredentials: true }));
     return response;
+  }
+
+  // Search for cards
+  searchCards(query: string): Observable<any[]> {
+    const params = { query };
+    return this.http.get<any[]>(`${environment.apiUrl}/cards/search`, { params });
   }
 }
