@@ -32,25 +32,25 @@ export class SearchComponent {
       clearTimeout(this.searchTimeout);
     }
 
-    this.searchStarted.emit(); // Indicate search is loading
+    this.searchStarted.emit();
     this.searchTimeout = setTimeout(async () => {
       if (this.searchQuery.trim()) {
         await this.searchCards();
       } else {
         this.searchResults = [];
       }
-      this.searchEnded.emit(); // Indicate search is complete
+      this.searchEnded.emit();
     }, 300);
   }
 
   private async searchCards(): Promise<void> {
     try {
-      const rawResults = await firstValueFrom(this.cardService.searchCards(this.searchQuery.trim()));
+      const rawResults = await this.cardService.searchCards(this.searchQuery);
       this.searchResults = rawResults.map((card: any) => ({
         ...card,
         image: card.image.startsWith('data:image') 
           ? card.image 
-          : `data:image/jpeg;base64,${card.image}`,
+          : `data:image/jpeg;base64,${card.image}`
       }));
     } catch (err) {
       console.error('Error searching cards:', err);

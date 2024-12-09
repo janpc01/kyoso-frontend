@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { catchError, Observable } from 'rxjs';
 @Injectable({
@@ -51,8 +51,11 @@ export class CardService {
   }
 
   // Search for cards
-  searchCards(query: string): Observable<any[]> {
-    const params = { query };
-    return this.http.get<any[]>(`${environment.apiUrl}/cards/search`, { params });
-  }
+  async searchCards(query: string): Promise<any> {
+    return firstValueFrom(
+      this.http.get(`${environment.apiUrl}/cards/search?q=${query}`, {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      })
+    );
+  } 
 }
