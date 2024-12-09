@@ -11,19 +11,18 @@
     Enter a card name to search
   </div>
 
-  <!-- Search Results -->
-  <div *ngFor="let card of searchResults" class="card-wrapper">
-    <div class="card">
-      <div class="season-text">2024/25</div>
-      <div class="card-image" [style.backgroundImage]="'url(' + card.image + ')'"></div>
-      <div class="card-info">
-        <div class="info-field">{{ card.name }}</div>
-        <div class="info-field">{{ card.beltRank }}</div>
-        <div class="info-field">{{ card.achievement }}</div>
-        <div class="info-field">{{ card.clubName }}</div>
-      </div>
+  <!-- Search Results using CardFormatComponent -->
+  <div class="search-results">
+    <div *ngFor="let card of searchResults" class="card-wrapper">
+      <app-card-format
+        [cardImage]="card.image"
+        [name]="card.name"
+        [beltRank]="card.beltRank"
+        [achievement]="card.achievement"
+        [clubName]="card.clubName"
+      ></app-card-format>
+      <button class="card-actions" (click)="addToCart(card)">Add to Cart</button>
     </div>
-    <button class="card-actions" (click)="addToCart(card)">Add to Cart</button>
   </div>
 
   <div *ngIf="searchQuery.trim() && searchResults.length === 0" class="no-results-message">

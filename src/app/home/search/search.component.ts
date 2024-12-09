@@ -2,14 +2,14 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { CardService } from '../../services/card.service';
 import { CartService } from '../../services/cart.service';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CardFormatComponent } from '../../card/card-format/card-format.component';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, CardFormatComponent],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
 })
