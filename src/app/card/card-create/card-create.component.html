@@ -1,6 +1,6 @@
 <div class="card-create">
   <div class="card-container">
-    <div class="season-text">Season 1</div>
+    <div class="season-text">2024/25</div>
     
     <div class="image-area">
       <button 
@@ -8,7 +8,7 @@
         [style.backgroundImage]="card.image ? 'url(' + card.image + ')' : 'url(/assets/images/placeholder.jpg)'"
         (click)="fileInput.click()"
       >
-        <span *ngIf="!card.image">Click to upload your image!</span>
+        <span *ngIf="!card.image">Click to upload your image</span>
       </button>
       <input 
         #fileInput
