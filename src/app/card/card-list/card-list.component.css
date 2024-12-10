@@ -1,18 +1,51 @@
-/* Container for the card list */
-div {
-  width: 95%;
-  max-width: 100%;
-  margin: 20px auto;
-  font-family: Arial, sans-serif;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #31333f;
+}
+
+.create-button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.create-button-container a {
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  font-size: 1.1em;
+}
+
+.create-button-container a:hover {
+  background-color: #0056b3;
 }
 
 .card-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 30px;
   padding: 20px;
   margin: 0;
+}
+
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .card {
@@ -25,117 +58,42 @@ div {
   border-radius: 24px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
-  margin-bottom: 10px;
+  transition: transform 0.3s ease;
 }
 
-.card-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 20px;
-  width: 360px;
-}
-
-.card-image {
-position: absolute;
-top: 62px;
-left: 50%;
-transform: translateX(-50%);
-width: 262px;
-height: 219px;
-display: flex;
-align-items: center;
-justify-content: center;
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-border-radius: 4px;
-}
-
-.card-info {
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 85%;
-  padding: 10px;
-  border-radius: 8px;
-}
-
-.info-field {
-  margin-bottom: -15px;
-  padding: 0px;
-  background: transparent;
-  border: 1px solid rgba(204, 204, 204, 0.5);
-  border-radius: 4px;
-  font-size: 14px;
-  color: #000000;
-  text-align: center;
-  font-weight: bold;
-}
-
-.season-text {
-  position: absolute;
-  top: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #000000;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  z-index: 1;
+.card:hover {
+  transform: translateY(-5px);
 }
 
 .card-actions {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  padding: 10px;
-  margin-top: 15px;
+  gap: 15px;
+  padding: 15px;
   width: 100%;
 }
 
-.card-actions button, .card-actions a {
-  padding: 8px 16px;
+.card-actions button {
+  padding: 10px 20px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.card-actions button:hover, .card-actions a:hover {
-  background-color: #0056b3;
-}
-
-h2 {
-  text-align: center;
-  font-weight: bold;
-  font-size: 3rem;
-  margin-bottom: 20px;
-  color: black;
-}
-
-.create-button-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-}
-
-.create-button-container a {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: bold;
+  font-size: 1em;
   transition: background-color 0.3s;
 }
 
-.create-button-container a:hover {
+.card-actions button:hover {
   background-color: #0056b3;
+}
+
+.card-actions button:last-child {
+  background-color: #dc3545;
+}
+
+.card-actions button:last-child:hover {
+  background-color: #c82333;
 }
 
 .modal {
@@ -153,7 +111,7 @@ h2 {
 
 .modal-content {
   background-color: white;
-  padding: 20px;
+  padding: 30px;
   border-radius: 8px;
   width: 90%;
   max-width: 400px;
@@ -162,22 +120,30 @@ h2 {
 
 .modal-content h3 {
   margin-top: 0;
-  color: #333;
+  color: #31333f;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+.modal-content p {
+  color: #666;
+  margin-bottom: 20px;
 }
 
 .modal-actions {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 15px;
 }
 
 .modal-actions button {
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 500;
+  font-size: 1em;
+  transition: background-color 0.3s;
 }
 
 .modal-actions button:first-child {
@@ -198,12 +164,11 @@ h2 {
   background-color: #5a6268;
 }
 
-/* Add this new container style */
-.card-list-container {
-background-color: #9b9dac;
-border-radius: 8px;
-padding: 20px;
-margin: 20px auto;
-width: 95%;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.error-message {
+  text-align: center;
+  color: #dc3545;
+  padding: 15px;
+  margin: 20px 0;
+  background-color: #f8d7da;
+  border-radius: 4px;
 }

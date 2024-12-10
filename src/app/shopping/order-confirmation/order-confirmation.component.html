@@ -12,14 +12,13 @@
     </div>
   
     <!-- Success State -->
-    <div *ngIf="!isLoading && order">
+    <div *ngIf="!isLoading && order" class="confirmation-message">
       <p>Thank you for your order, <strong>{{ order.shippingAddress.fullName }}</strong>!</p>
       <p>Your order ID is: <strong>{{ order._id }}</strong></p>
   
       <h3>Order Summary</h3>
       <div class="order-items">
         <div *ngFor="let item of order.items" class="order-item">
-          <img [src]="item.card.image" [alt]="item.card.name" />
           <div class="item-details">
             <p><strong>{{ item.card.name }}</strong></p>
             <p>Quantity: {{ item.quantity }}</p>
@@ -33,5 +32,5 @@
       <!-- Return to Home -->
       <button (click)="goToHome()">Return to Home</button>
     </div>
-  </div>
+</div>
   

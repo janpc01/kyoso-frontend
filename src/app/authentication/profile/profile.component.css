@@ -1,3 +1,10 @@
+div {
+  width: 95%;
+  max-width: 100%;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
 .profile {
     margin: 20px;
     font-family: Arial, sans-serif;
@@ -6,5 +13,35 @@
   
   h2 {
     margin-bottom: 20px;
+    font-size: 2em;
+    font-weight: 500;
+    color: #31333f;
   }
   
+  .create-button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.create-button-container a {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.create-button-container a:hover {
+    background-color: #0056b3;
+}
+
+.card-list-container {
+  background-color: #9b9dac;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px auto;
+  width: 95%;
+}

@@ -26,6 +26,19 @@ h2 {
   color: #dc3545;
 }
 
+.confirmation-message {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.confirmation-message p {
+  margin: 10px 0;
+  color: #31333f;
+  font-size: 1.1em;
+}
+
 .order-items {
   display: flex;
   flex-direction: column;
@@ -34,36 +47,28 @@ h2 {
 }
 
 .order-item {
-  display: flex;
-  align-items: center;
-  background-color: white;
+  background-color: #f8f9fa;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.order-item img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 4px;
-  margin-right: 20px;
-}
-
 .item-details {
-  flex-grow: 1;
+  color: #31333f;
 }
 
 .item-details p {
-  margin: 5px 0;
-  color: #31333f;
+  margin: 8px 0;
+}
+
+.item-details p strong {
+  font-size: 1.1em;
 }
 
 h3 {
   color: #31333f;
   margin: 20px 0;
   font-size: 1.5rem;
-  text-align: right;
 }
 
 button {
