@@ -6,11 +6,14 @@ import { AuthService } from '../../services/auth.service';
 import { CardService } from '../../services/card.service';
 import { CardFormatComponent } from '../card-format/card-format.component';
 import { Router } from '@angular/router';
+import { ImageCroppedEvent, ImageCropperComponent, LoadedImage } from 'ngx-image-cropper';
+
+
 
 @Component({
   selector: 'app-card-create',
   standalone: true,
-  imports: [CommonModule, FormsModule, CardFormatComponent],
+  imports: [CommonModule, FormsModule, ImageCropperComponent],
   templateUrl: './card-create.component.html',
   styleUrls: ['./card-create.component.css'],
 })
@@ -26,22 +29,48 @@ export class CardCreateComponent {
   selectedImage: File | null = null;
   errorMessage: string = '';
   successMessage: string = '';
-  previewImage: string = '../assets/images/placeholder.jpg';
+  previewImage: string | null | undefined = '../assets/images/placeholder.jpg';
+  imageChangedEvent: any = '';
+  showCropper = false;
 
   constructor(private http: HttpClient, private authService: AuthService, private cardService: CardService, private router: Router) {}
 
-  onImageSelected(event: any) {
-    const file = event.target.files[0];
-    this.card.image = file;
-    
-    // Create preview URL
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.previewImage = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
+  onImageSelected(event: any): void {
+    this.imageChangedEvent = event;
+    this.showCropper = true;
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+    this.previewImage = event.base64;
+    this.card.image = event.base64;
+  }
+
+  imageLoaded(image: LoadedImage) {
+    // Image loaded into cropper
+  }
+
+  cropperReady() {
+    // Cropper is ready to use
+  }
+
+  loadImageFailed() {
+    alert('Failed to load image. Please try another image.');
+  }
+
+  finishCropping() {
+    this.showCropper = false;
+  }
+
+  saveCrop() {
+    this.showCropper = false;
+    this.imageChangedEvent = null;
+  }
+
+  cancelCrop() {
+    this.showCropper = false;
+    this.imageChangedEvent = null;
+    this.previewImage = null;
+    this.card.image = '';
   }
 
   async composeCard(): Promise<void> {

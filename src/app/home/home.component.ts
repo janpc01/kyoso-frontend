@@ -4,12 +4,20 @@ import { SearchComponent } from './search/search.component';
 import { FaqComponent } from './faq/faq.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CardCreateComponent, SearchComponent, FaqComponent, FormsModule, CommonModule],
+  imports: [
+    CardCreateComponent, 
+    SearchComponent, 
+    FaqComponent, 
+    FormsModule, 
+    CommonModule,
+    RouterLink
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

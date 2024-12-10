@@ -3,16 +3,41 @@
     <div class="season-text">Season 1</div>
     
     <div class="image-area">
-      <button class="upload-button" (click)="fileInput.click()">
-        <img [src]="previewImage" *ngIf="previewImage" alt="Preview" style="width: 100%; height: 100%; object-fit: cover;">
+      <button 
+        class="upload-button" 
+        [style.backgroundImage]="card.image ? 'url(' + card.image + ')' : 'url(/assets/images/placeholder.jpg)'"
+        (click)="fileInput.click()"
+      >
+        <span *ngIf="!card.image">Click to upload your image!</span>
       </button>
-      <input
+      <input 
         #fileInput
         type="file"
+        accept="image/*"
         (change)="onImageSelected($event)"
         style="display: none;"
-        accept="image/*"
       />
+    </div>
+
+    <!-- Image Cropper Modal -->
+    <div class="modal" *ngIf="showCropper">
+      <div class="modal-content">
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="328/274"
+          format="jpeg"
+          [resizeToWidth]="800"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded($event)"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
+        <div class="modal-actions">
+          <button (click)="saveCrop()">Save</button>
+          <button (click)="cancelCrop()">Cancel</button>
+        </div>
+      </div>
     </div>
 
     <div class="info-area">
