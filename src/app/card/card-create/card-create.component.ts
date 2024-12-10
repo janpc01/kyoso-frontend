@@ -41,8 +41,10 @@ export class CardCreateComponent {
   }
 
   imageCropped(event: ImageCroppedEvent) {
-    this.previewImage = event.base64;
-    this.card.image = event.base64;
+    if (event.base64) {
+      this.previewImage = event.base64;
+      this.card.image = event.base64;
+    }
   }
 
   imageLoaded(image: LoadedImage) {
@@ -55,6 +57,8 @@ export class CardCreateComponent {
 
   loadImageFailed() {
     alert('Failed to load image. Please try another image.');
+    this.showCropper = false;
+    this.imageChangedEvent = null;
   }
 
   finishCropping() {

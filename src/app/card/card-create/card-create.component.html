@@ -3,11 +3,8 @@
     <div class="season-text">2024/25</div>
     
     <div class="image-area">
-      <button 
-        class="upload-button" 
-        [style.backgroundImage]="card.image ? 'url(' + card.image + ')' : 'url(/assets/images/placeholder.jpg)'"
-        (click)="fileInput.click()"
-      >
+      <button class="upload-button" (click)="fileInput.click()">
+        <img [src]="card.image || '/assets/images/placeholder.jpg'" alt="Card image">
         <span *ngIf="!card.image">Click to upload your image</span>
       </button>
       <input 
