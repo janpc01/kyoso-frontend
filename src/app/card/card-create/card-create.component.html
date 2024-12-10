@@ -4,8 +4,8 @@
     
     <div class="image-area">
       <button class="upload-button" (click)="fileInput.click()">
-        <img [src]="card.image || '/assets/images/placeholder.jpg'" alt="Card image">
-        <span *ngIf="!card.image">Click to upload your image</span>
+        <img [src]="previewImage || '/assets/images/placeholder.jpg'" alt="Card image">
+        <span *ngIf="!previewImage">Click to upload your image</span>
       </button>
       <input 
         #fileInput
@@ -23,8 +23,12 @@
           [imageChangedEvent]="imageChangedEvent"
           [maintainAspectRatio]="true"
           [aspectRatio]="328/274"
-          format="jpeg"
+          format="png"
           [resizeToWidth]="800"
+          [roundCropper]="false"
+          [canvasRotation]="0"
+          [transform]="{ translateUnit: 'px' }"
+          [alignImage]="'center'"
           (imageCropped)="imageCropped($event)"
           (imageLoaded)="imageLoaded($event)"
           (cropperReady)="cropperReady()"
