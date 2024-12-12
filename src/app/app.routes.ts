@@ -14,6 +14,7 @@ import { OrderConfirmationComponent } from './shopping/order-confirmation/order-
 // Extra Pages
 import { ContactComponent } from './extra-pages/contact/contact.component';
 import { GameRulesComponent } from './extra-pages/game-rules/game-rules.component';
+import { CardCreateComponent } from './card/card-create/card-create.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,5 +26,6 @@ export const routes: Routes = [
   { path: 'order-confirmation', component: OrderConfirmationComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'game-rules', component: GameRulesComponent },
+  { path: 'create', component: CardCreateComponent },
   { path: '**', redirectTo: '' }, // Redirect unknown routes to home
 ];
