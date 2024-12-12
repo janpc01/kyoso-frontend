@@ -1,62 +1,64 @@
 <div class="checkout-container">
-    <h2>Checkout</h2>
-  
-    <!-- Shipping Form -->
-    <form [formGroup]="checkoutForm" *ngIf="!showPaymentElement">
-      <h3>Shipping Information</h3>
-  
-      <div>
+  <h2>Checkout</h2>
+
+  <!-- Shipping Form -->
+  <form [formGroup]="checkoutForm" *ngIf="!showPaymentElement">
+    <h3>Shipping Information</h3>
+    <div class="form-grid">
+      <div class="form-group">
         <label>Full Name</label>
-        <input formControlName="fullName" />
+        <input formControlName="fullName" placeholder="John Doe" />
       </div>
-  
-      <div>
+
+      <div class="form-group">
         <label>Email</label>
-        <input formControlName="email" type="email" />
+        <input formControlName="email" type="email" placeholder="example@mail.com" />
       </div>
-  
-      <div>
+
+      <div class="form-group">
         <label>Phone</label>
-        <input formControlName="phone" />
+        <input formControlName="phone" placeholder="+1 234 567 890" />
       </div>
-  
-      <div>
+
+      <div class="form-group">
         <label>Address</label>
-        <input formControlName="addressLine1" />
+        <input formControlName="addressLine1" placeholder="123 Main St" />
       </div>
-  
-      <div>
+
+      <div class="form-group">
         <label>City</label>
-        <input formControlName="city" />
+        <input formControlName="city" placeholder="City" />
       </div>
-  
-      <div>
+
+      <div class="form-group">
         <label>Province</label>
-        <input formControlName="province" />
+        <input formControlName="province" placeholder="State/Province" />
       </div>
-  
-      <div>
+
+      <div class="form-group">
         <label>Postal Code</label>
-        <input formControlName="postalCode" />
+        <input formControlName="postalCode" placeholder="A1B 2C3" />
       </div>
-  
-      <div>
+
+      <div class="form-group">
         <label>Country</label>
-        <input formControlName="country" />
+        <input formControlName="country" placeholder="Country" />
       </div>
-  
+    </div>
+
+    <div class="button-container">
       <button (click)="proceedToPayment()" [disabled]="checkoutForm.invalid">
         Proceed to Payment
       </button>
-    </form>
-  
-    <!-- Stripe Payment Element -->
-    <div *ngIf="showPaymentElement">
-        <h3>Payment Information</h3>
-        <div id="payment-element"></div>
-        <button (click)="submitPayment($event)" [disabled]="isProcessing">
-            {{ isProcessing ? 'Processing...' : 'Pay and Complete Order' }}
-        </button>
     </div>
-  
+  </form>
+
+  <!-- Stripe Payment Element -->
+  <div *ngIf="showPaymentElement" class="payment-section">
+    <h3>Payment Information</h3>
+    <div id="payment-element"></div>
+    <button (click)="submitPayment($event)" [disabled]="isProcessing">
+      {{ isProcessing ? 'Processing...' : 'Pay and Complete Order' }}
+    </button>
+  </div>
 </div>
