@@ -43,6 +43,7 @@ export class CardListComponent implements OnInit {
       price: card.price,
       quantity: 1, // Default to 1 when adding a new item
     });
+    alert(`${card.name} has been added to your cart!`);
     console.log('Added to cart:', card);
   }
 
