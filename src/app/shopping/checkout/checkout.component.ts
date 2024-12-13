@@ -20,7 +20,7 @@ export class CheckoutComponent implements OnInit {
   checkoutForm!: FormGroup;
   cartItems: CartItem[] = [];
   total: number = 0;
-
+  isLoadingPayment: boolean = false;
   stripe!: Stripe | null;
   elements!: StripeElements;
   showPaymentElement = false;
@@ -57,6 +57,8 @@ export class CheckoutComponent implements OnInit {
   async proceedToPayment() {
     if (this.checkoutForm.invalid) return;
 
+    this.isLoadingPayment = true;
+
     try {
       // Load Stripe
       this.stripe = await this.paymentService.getStripe();
@@ -84,6 +86,8 @@ export class CheckoutComponent implements OnInit {
     } catch (error) {
       console.error('Error initializing payment:', error);
       alert('Failed to initialize payment. Please try again.');
+    } finally {
+      this.isLoadingPayment = false;
     }
   }
 

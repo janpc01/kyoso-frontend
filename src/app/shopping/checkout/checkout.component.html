@@ -47,8 +47,16 @@
     </div>
 
     <div class="button-container">
-      <button (click)="proceedToPayment()" [disabled]="checkoutForm.invalid">
-        Proceed to Payment
+      <button 
+        (click)="proceedToPayment()" 
+        [disabled]="checkoutForm.invalid || isLoadingPayment"
+        class="proceed-button"
+      >
+        <span *ngIf="!isLoadingPayment">Proceed to Payment</span>
+        <span *ngIf="isLoadingPayment">
+          <div class="spinner-small"></div>
+          Initializing Payment...
+        </span>
       </button>
     </div>
   </form>
