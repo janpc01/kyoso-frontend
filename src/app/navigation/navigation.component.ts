@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 export class NavigationComponent implements OnInit, OnDestroy {
   isAuthenticated: boolean = false;
   private authSubscription?: Subscription;
+  isMenuOpen = false;
 
   constructor(
     private authService: AuthService,
@@ -37,6 +38,18 @@ export class NavigationComponent implements OnInit, OnDestroy {
     } catch (error) {
       console.error('Logout failed:', error);
     }
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+    const hamburger = document.querySelector('.hamburger');
+    hamburger?.classList.toggle('active');
+  }
+
+  closeMenu() {
+    this.isMenuOpen = false;
+    const hamburger = document.querySelector('.hamburger');
+    hamburger?.classList.remove('active');
   }
 
   ngOnDestroy() {
