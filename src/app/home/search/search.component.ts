@@ -17,6 +17,7 @@ export class SearchComponent {
   searchQuery: string = '';
   searchResults: any[] = [];
   searchTimeout: any;
+  isLoading: boolean = false;
 
   @Output() searchStarted = new EventEmitter<void>();
   @Output() searchEnded = new EventEmitter<void>();
@@ -33,12 +34,15 @@ export class SearchComponent {
     }
 
     this.searchStarted.emit();
+    this.isLoading = true;
+    
     this.searchTimeout = setTimeout(async () => {
       if (this.searchQuery.trim()) {
         await this.searchCards();
       } else {
         this.searchResults = [];
       }
+      this.isLoading = false;
       this.searchEnded.emit();
     }, 300);
   }

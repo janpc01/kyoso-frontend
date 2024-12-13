@@ -11,8 +11,14 @@
     Enter a card name to search
   </div>
 
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Searching cards...</p>
+  </div>
+
   <!-- Search Results using CardFormatComponent -->
-  <div class="search-results">
+  <div class="search-results" *ngIf="!isLoading">
     <div *ngFor="let card of searchResults" class="card-wrapper">
       <app-card-format
         [cardImage]="card.image"
@@ -25,7 +31,7 @@
     </div>
   </div>
 
-  <div *ngIf="searchQuery.trim() && searchResults.length === 0" class="no-results-message">
+  <div *ngIf="searchQuery.trim() && searchResults.length === 0 && !isLoading" class="no-results-message">
     No cards found matching "{{ searchQuery }}"
   </div>
 </div>
