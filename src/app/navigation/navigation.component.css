@@ -106,19 +106,20 @@ button.nav-link:hover {
   }
 
   .navbar-nav {
-    position: absolute;
-    top: 100%;
-    left: -100%;
+    position: fixed;
+    top: -100%;
+    left: 0;
     width: 100%;
     background-color: #31333f;
     flex-direction: column;
     padding: 20px;
-    transition: left 0.3s ease;
+    transition: top 0.3s ease;
     z-index: 1000;
+    box-sizing: border-box;
   }
 
   .navbar-nav.active {
-    left: 0;
+    top: 0;
   }
 
   .navbar-nav .nav-link {
@@ -126,6 +127,7 @@ button.nav-link:hover {
     width: 100%;
     text-align: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
   }
 
   .ml-auto {
