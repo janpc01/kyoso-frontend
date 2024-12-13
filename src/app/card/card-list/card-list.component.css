@@ -172,3 +172,29 @@ h2 {
   background-color: #f8d7da;
   border-radius: 4px;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .card-list {
+    padding: 5px;
+    gap: 15px;
+  }
+
+  .card-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    aspect-ratio: 360/508;
+  }
+}
