@@ -63,7 +63,13 @@ export class SearchComponent {
   }
 
   addToCart(card: any): void {
-    this.cartService.addToCart(card);
+    this.cartService.addToCart({
+      cardId: card._id,
+      name: card.name,
+      image: card.image,
+      price: card.price,
+      quantity: 1
+    });
     this.router.navigate(['/cart']);
   }
 }
