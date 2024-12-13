@@ -14,17 +14,23 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  errorMessage: string = ''; // To store error messages
+  errorMessage: string = '';
+  isLoading = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   async onSubmit() {
+    this.isLoading = true;
+    this.errorMessage = '';
+    
     try {
       await this.authService.login(this.email, this.password);
-      this.router.navigate(['/']); // Redirect to home page on successful login
+      this.router.navigate(['/']);
     } catch (error: any) {
       console.error('Login failed:', error);
-      this.errorMessage = error?.error?.message || 'An error occurred. Please try again.'; // Extract message or set a default
+      this.errorMessage = error?.error?.message || 'An error occurred. Please try again.';
+    } finally {
+      this.isLoading = false;
     }
   }
 }

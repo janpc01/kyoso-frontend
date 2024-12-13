@@ -11,6 +11,7 @@
           required
           email
           #emailCtrl="ngModel"
+          [disabled]="isLoading"
         />
         <div *ngIf="emailCtrl.invalid && emailCtrl.touched" class="error">
           <small *ngIf="emailCtrl.errors?.['required']">Email is required.</small>
@@ -28,6 +29,7 @@
           required
           minlength="8"
           #passwordCtrl="ngModel"
+          [disabled]="isLoading"
         />
         <div *ngIf="passwordCtrl.invalid && passwordCtrl.touched" class="error">
           <small *ngIf="passwordCtrl.errors?.['required']">Password is required.</small>
@@ -46,13 +48,17 @@
           name="confirmPassword"
           required
           #confirmPasswordCtrl="ngModel"
+          [disabled]="isLoading"
         />
         <div *ngIf="confirmPasswordCtrl.touched && confirmPassword !== password" class="error">
           <small>Passwords do not match.</small>
         </div>
       </div>
   
-      <button type="submit" [disabled]="registrationForm.invalid">Register</button>
+      <button type="submit" [disabled]="registrationForm.invalid || isLoading">
+        <span *ngIf="!isLoading">Register</span>
+        <span *ngIf="isLoading">Registering...</span>
+      </button>
     </form>
   </div>
   

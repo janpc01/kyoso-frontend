@@ -9,6 +9,7 @@
         [(ngModel)]="email"
         name="email"
         required
+        [disabled]="isLoading"
       />
     </div>
     <div>
@@ -19,11 +20,15 @@
         [(ngModel)]="password"
         name="password"
         required
+        [disabled]="isLoading"
       />
     </div>
     <div *ngIf="errorMessage" class="error">
       {{ errorMessage }}
     </div>
-    <button type="submit">Login</button>
+    <button type="submit" [disabled]="isLoading">
+      <span *ngIf="!isLoading">Login</span>
+      <span *ngIf="isLoading">Logging in...</span>
+    </button>
   </form>
 </div>

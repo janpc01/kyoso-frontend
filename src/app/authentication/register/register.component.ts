@@ -16,6 +16,7 @@ export class RegisterComponent {
   password: string = '';
   confirmPassword: string = '';
   errorMessage = '';
+  isLoading = false;
 
   constructor(private authService: AuthService, private router: Router) {}
   
@@ -24,6 +25,9 @@ export class RegisterComponent {
       this.errorMessage = 'Passwords do not match';
       return;
     }
+
+    this.isLoading = true;
+    this.errorMessage = '';
 
     try {
       // Register the user
@@ -38,6 +42,8 @@ export class RegisterComponent {
       this.router.navigate(['/']);
     } catch (error: any) {
       this.errorMessage = error?.error?.message || 'An error occurred. Please try again.';
+    } finally {
+      this.isLoading = false;
     }
   }
 }
