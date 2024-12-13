@@ -7,8 +7,6 @@
   align-items: center;
   min-height: 60px;
   background-color: #31333f;
-  position: sticky;
-  top: 0;
   z-index: 1000;
 }
 
@@ -108,11 +106,10 @@ button.nav-link:hover {
   }
 
   .navbar-nav {
-    position: fixed;
-    top: 60px;
+    position: absolute;
+    top: 100%;
     left: -100%;
     width: 100%;
-    height: calc(100vh - 60px);
     background-color: #31333f;
     flex-direction: column;
     padding: 20px;
