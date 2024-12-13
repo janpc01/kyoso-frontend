@@ -1,8 +1,6 @@
 .card {
-  width: 100%;
-  max-width: 450px;
-  height: auto;
-  aspect-ratio: 450/635;
+  width: 450px;
+  height: 635px;
   margin: 0 auto;
   background-image: url('/assets/images/card-bg.png');
   background-size: cover;
@@ -12,15 +10,16 @@
   border-radius: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
+  margin-bottom: 20px;
 }
 
 .image-area {
   position: absolute;
-  top: 16%;
+  top: 104px;
   left: 50%;
   transform: translateX(-50%);
-  width: 73%;
-  height: 43%;
+  width: 328px;
+  height: 274px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,7 +35,7 @@
 
 .info-area {
   position: absolute;
-  bottom: 3%;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   width: 85%;
@@ -65,11 +64,5 @@
   font-weight: bold;
   text-align: center;
   z-index: 1;
-}
-
-@media (max-width: 768px) {
-  .card {
-    max-width: 280px;
-  }
 }
   
