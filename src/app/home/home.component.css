@@ -195,6 +195,31 @@ h2 {
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
+  .home-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .left-panel, .right-panel {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .card-wrapper {
+    width: 100%;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    aspect-ratio: 450/635;
+  }
+
+  .search-input {
+    width: calc(100% - 20px);
+  }
+
   .faq-grid {
     grid-template-columns: 1fr;
   }

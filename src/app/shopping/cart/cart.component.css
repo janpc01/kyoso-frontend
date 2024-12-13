@@ -118,3 +118,20 @@ h2 {
 .checkout-button:hover {
   background-color: #218838;
 }
+
+@media (max-width: 768px) {
+  .cart-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .item-details {
+    margin-left: 0;
+    margin-top: 15px;
+  }
+
+  .quantity-controls {
+    justify-content: center;
+  }
+}

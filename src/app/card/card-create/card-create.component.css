@@ -156,3 +156,29 @@
 image-cropper {
   max-height: 70vh;
 }
+
+@media (max-width: 768px) {
+  .card-container {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    aspect-ratio: 450/635;
+  }
+
+  .image-area {
+    width: 80%;
+    height: auto;
+    aspect-ratio: 328/274;
+    top: 16%;
+  }
+
+  .info-area {
+    width: 90%;
+  }
+
+  .modal-content {
+    width: 95%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}
