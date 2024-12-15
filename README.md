@@ -60,6 +60,8 @@ KyosoCards is deployed and accessible at [kyosocards.com](https://kyosocards.com
 - Web application firewall (WAF)
 - Regular security audits and updates
 
+---
+
 ## **Features**
 
 ### **Core Features**
@@ -93,6 +95,8 @@ client/
 ├── package.json
 ├── tsconfig.json
 ```
+
+---
 
 ## **Core Components**
 ### **App Component**
@@ -235,6 +239,8 @@ client/
 - **File**: `storage.service.ts`
 - **Features**:
   - Manage token and cart storage in localStorage.
+
+---
 
 ## **Technology Stack**
 - **Frontend**: Angular, TypeScript, HTML, CSS.
