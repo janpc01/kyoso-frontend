@@ -93,6 +93,8 @@ client/
 - **Files**: `navigation.component.ts`, `navigation.component.html`, `navigation.component.css`
 - **Purpose**: Navigation bar with dynamic links based on authentication status.
 
+---
+
 ## **Authentication**
 
 ### **Login Component**
