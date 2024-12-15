@@ -1,6 +1,7 @@
-# **Angular Application for KyosoCards.com**
+# **Angular Application for [KyosoCards.com](https://kyosocards.com)**
 
-This project is an Angular-based web application for managing custom cards, user authentication, shopping cart functionalities, and order processing. The app features dynamic components, robust validation, and integrates with external services like Stripe for payments.
+This project is an Angular-based web application for the website [KyosoCards.com](https://kyosocards.com). 
+Some features include managing custom cards, user authentication, shopping cart functionalities, and order processing. The app features dynamic components, robust validation, and integrates with external services like Stripe for payments.
 
 ---
 
