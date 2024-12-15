@@ -46,18 +46,6 @@ KyosoCards is deployed and accessible at [kyosocards.com](https://kyosocards.com
 - Production environment variables managed through Azure
 - Secure secrets handling using Azure App Configuration
 
-### Monitoring and Analytics
-- Azure Application Insights integration
-- Real-time performance monitoring
-- User behavior analytics
-- Error tracking and logging
-
-### Security Features
-- Azure DDoS protection
-- Automated SSL/TLS certificate management
-- Web application firewall (WAF)
-- Regular security audits and updates
-
 ---
 
 ## **Features**
