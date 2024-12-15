@@ -233,15 +233,15 @@ client/
   - Add/remove items from the cart.
   - Update quantities and calculate totals.
 
-### **Storage Service**
-- **File**: `storage.service.ts`
-- **Features**:
-  - Manage token and cart storage in localStorage.
-
 ### **Email Service**
 - **File**: `email.service.ts`
 - **Features**:
   - Send emails via Email Service.
+
+### **Storage Service**
+- **File**: `storage.service.ts`
+- **Features**:
+  - Manage token and cart storage in localStorage.
 
 ---
 
