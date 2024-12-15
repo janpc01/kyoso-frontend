@@ -44,9 +44,7 @@ KyosoCards is deployed and accessible at [kyosocards.com](https://kyosocards.com
 
 ### Environment Configuration
 - Production environment variables managed through Azure
-- Secure secrets handling using Azure Key Vault
-- Multiple staging environments for testing
-- Automated rollbacks available if needed
+- Secure secrets handling using Azure App Configuration
 
 ### Monitoring and Analytics
 - Azure Application Insights integration
