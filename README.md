@@ -240,6 +240,11 @@ client/
 - **Features**:
   - Manage token and cart storage in localStorage.
 
+### **Email Service**
+- **File**: `email.service.ts`
+- **Features**:
+  - Send emails via Email Service.
+
 ---
 
 ## **Technology Stack**
