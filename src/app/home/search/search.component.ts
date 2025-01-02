@@ -18,6 +18,7 @@ export class SearchComponent {
   searchResults: any[] = [];
   searchTimeout: any;
   isLoading: boolean = false;
+  searchPerformed: boolean = false;
 
   @Output() searchStarted = new EventEmitter<void>();
   @Output() searchEnded = new EventEmitter<void>();
@@ -31,6 +32,7 @@ export class SearchComponent {
   async onSearch(): Promise<void> {
     this.searchStarted.emit();
     this.isLoading = true;
+    this.searchPerformed = true;
 
     if (this.searchQuery.trim()) {
       await this.searchCards();

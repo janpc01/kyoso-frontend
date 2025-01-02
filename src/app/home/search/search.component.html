@@ -3,12 +3,12 @@
   <input
     [(ngModel)]="searchQuery"
     (keyup.enter)="onSearch()"
-    placeholder="Enter card name..."
+    placeholder="Type judoka name and press enter"
     class="search-input"
   />
 
   <div *ngIf="!searchQuery.trim()" class="no-search-message">
-    Enter a card name to search
+    Type judoka name and press enter
   </div>
 
   <!-- Loading Spinner -->
@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <div *ngIf="searchQuery.trim() && searchResults.length === 0 && !isLoading" class="no-results-message">
+  <div *ngIf="searchResults.length === 0 && !isLoading && searchPerformed" class="no-results-message">
     No cards found matching "{{ searchQuery }}"
   </div>
 </div>
