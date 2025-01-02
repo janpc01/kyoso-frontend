@@ -2,7 +2,7 @@
   <h2>Search Cards by Name</h2>
   <input
     [(ngModel)]="searchQuery"
-    (keyup)="onSearch()"
+    (keyup.enter)="onSearch()"
     placeholder="Enter card name..."
     class="search-input"
   />

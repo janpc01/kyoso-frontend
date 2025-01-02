@@ -28,23 +28,18 @@ export class SearchComponent {
     private router: Router
   ) {}
 
-  onSearch(): void {
-    if (this.searchTimeout) {
-      clearTimeout(this.searchTimeout);
-    }
-
+  async onSearch(): Promise<void> {
     this.searchStarted.emit();
     this.isLoading = true;
+
+    if (this.searchQuery.trim()) {
+      await this.searchCards();
+    } else {
+      this.searchResults = [];
+    }
     
-    this.searchTimeout = setTimeout(async () => {
-      if (this.searchQuery.trim()) {
-        await this.searchCards();
-      } else {
-        this.searchResults = [];
-      }
-      this.isLoading = false;
-      this.searchEnded.emit();
-    }, 300);
+    this.isLoading = false;
+    this.searchEnded.emit();
   }
 
   private async searchCards(): Promise<void> {
