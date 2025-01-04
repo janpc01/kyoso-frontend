@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardFormatComponent } from '../card-format/card-format.component';
 import { CardService } from '../../services/card.service';
@@ -12,7 +12,8 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./card-list.component.css'],
 })
 export class CardListComponent implements OnInit {
-  cards: any[] = [];
+  @Input() cards: any[] = [];
+  @Input() isSearchResult: boolean = false;
   errorMessage: string = '';
   showModal: boolean = false;
   cardToDeleteIndex: number | null = null;
@@ -20,17 +21,18 @@ export class CardListComponent implements OnInit {
   constructor(private cardService: CardService, private cartService: CartService) {}
 
   async ngOnInit() {
-    try {
-      const userId = await this.cardService.getUserId();
-      this.cards = await this.cardService.getUserCards(userId);
-      console.log(this.cards);
-    } catch (error: any) {
-      if (error.status === 404) {
-        this.errorMessage = 'No cards found for this user.';
-      } else {
-        this.errorMessage = 'Failed to load cards. Please try again later.';
+    if (!this.isSearchResult) {
+      try {
+        const userId = await this.cardService.getUserId();
+        this.cards = await this.cardService.getUserCards(userId);
+      } catch (error: any) {
+        if (error.status === 404) {
+          this.errorMessage = 'No cards found for this user.';
+        } else {
+          this.errorMessage = 'Failed to load cards. Please try again later.';
+        }
+        console.error('Error fetching cards:', error);
       }
-      console.error('Error fetching cards:', error);
     }
   }
 

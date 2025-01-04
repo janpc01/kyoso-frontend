@@ -1,22 +1,20 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CardService } from '../../services/card.service';
-import { CartService } from '../../services/cart.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CardFormatComponent } from '../../card/card-format/card-format.component';
+import { CardListComponent } from '../../card/card-list/card-list.component';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [FormsModule, CommonModule, CardFormatComponent],
+  imports: [FormsModule, CommonModule, CardListComponent],
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent {
   searchQuery: string = '';
   searchResults: any[] = [];
-  searchTimeout: any;
   isLoading: boolean = false;
   searchPerformed: boolean = false;
 
@@ -25,7 +23,6 @@ export class SearchComponent {
 
   constructor(
     private cardService: CardService,
-    private cartService: CartService,
     private router: Router
   ) {}
 
@@ -57,16 +54,5 @@ export class SearchComponent {
       console.error('Error searching cards:', err);
       this.searchResults = [];
     }
-  }
-
-  addToCart(card: any): void {
-    this.cartService.addToCart({
-      cardId: card._id,
-      name: card.name,
-      image: card.image,
-      price: card.price,
-      quantity: 1
-    });
-    this.router.navigate(['/cart']);
   }
 }

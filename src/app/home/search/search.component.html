@@ -17,19 +17,12 @@
     <p>Searching cards...</p>
   </div>
 
-  <!-- Search Results using CardFormatComponent -->
-  <div class="search-results" *ngIf="!isLoading">
-    <div *ngFor="let card of searchResults" class="card-wrapper">
-      <app-card-format
-        [cardImage]="card.image"
-        [name]="card.name"
-        [beltRank]="card.beltRank"
-        [achievement]="card.achievement"
-        [clubName]="card.clubName"
-      ></app-card-format>
-      <button class="card-actions" (click)="addToCart(card)">Add to Cart</button>
-    </div>
-  </div>
+  <!-- Search Results using CardListComponent -->
+  <app-card-list 
+    *ngIf="!isLoading && searchResults.length > 0"
+    [cards]="searchResults"
+    [isSearchResult]="true">
+  </app-card-list>
 
   <div *ngIf="searchResults.length === 0 && !isLoading && searchPerformed" class="no-results-message">
     No cards found matching "{{ searchQuery }}"
